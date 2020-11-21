@@ -36,7 +36,6 @@ public class UserController {
 		return userService.createUser(user);
 	}
 	
-	
 	//getUserById
 	//@GetMapping
 	//@PathVariable
@@ -44,7 +43,6 @@ public class UserController {
 	public Optional<User> getUserById(@PathVariable("id") Long id){
 		return userService.getUserById(id);
 	}
-	
 	
 	//updateUserById
 	//@Pathvariable, @RequestBody
