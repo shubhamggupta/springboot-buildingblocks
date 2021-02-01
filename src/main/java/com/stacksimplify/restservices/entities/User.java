@@ -1,9 +1,12 @@
 package com.stacksimplify.restservices.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -12,36 +15,39 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "user")
 public class User {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	@NotEmpty(message="User name is manadatory, please provide user name")
-	@Column(name="USER_NAME", length=50, nullable=false, unique=true)
+
+	@NotEmpty(message = "User name is manadatory, please provide user name")
+	@Column(name = "USER_NAME", length = 50, nullable = false, unique = true)
 	private String username;
-	
-	@Size(min=2, message="First name should have atleat 2 character")
-	@Column(name="FIRST_NAME", length=50, nullable=false)
+
+	@Size(min = 2, message = "First name should have atleat 2 character")
+	@Column(name = "FIRST_NAME", length = 50, nullable = false)
 	private String firstname;
-	
-	@Column(name="LAST_NAME", length=50, nullable=false)
+
+	@Column(name = "LAST_NAME", length = 50, nullable = false)
 	private String lastname;
-	
-	@Column(name="EMAIL_ADDRESS", length=50, nullable=false)
+
+	@Column(name = "EMAIL_ADDRESS", length = 50, nullable = false)
 	private String email;
-	
-	@Column(name="ROLE", length=50, nullable=false)
+
+	@Column(name = "ROLE", length = 50, nullable = false)
 	private String role;
-	
-	@Column(name="SSN", length=50, nullable=false, unique=true)
+
+	@Column(name = "SSN", length = 50, nullable = false, unique = true)
 	private String ssn;
 
-	//No Argument Constructor (Mandatory)
+	@OneToMany(mappedBy = "user")
+	private List<Order> orders;
+ 
+	// No Argument Constructor (Mandatory)
 	public User() {
 	}
 
-	//Fields Constuctor (Optional)
+	// Fields Constuctor (Optional)
 	public User(Long id, String username, String firstname, String lastname, String email, String role, String ssn) {
 		super();
 		this.id = id;
@@ -53,8 +59,7 @@ public class User {
 		this.ssn = ssn;
 	}
 
-	
-	//Getter and Setters (Mandatory)
+	// Getter and Setters (Mandatory)
 	public Long getId() {
 		return id;
 	}
@@ -82,7 +87,7 @@ public class User {
 	public String getLastname() {
 		return lastname;
 	}
-
+ 
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
@@ -111,12 +116,19 @@ public class User {
 		this.ssn = ssn;
 	}
 
-	//To String (Optional)
+	public List<Order> getOrder() {
+		return orders;
+	}
+
+	public void setOrder(List<Order> order) {
+		this.orders = order;
+	}
+
+	// To String (Optional)
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
 				+ ", email=" + email + ", role=" + role + ", ssn=" + ssn + "]";
 	}
-	
 
 }
