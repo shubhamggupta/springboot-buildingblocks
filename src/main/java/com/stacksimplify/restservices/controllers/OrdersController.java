@@ -69,7 +69,7 @@ public class OrdersController {
 				throw new OrderNotFoundException("Order not found");
 			}
 			else {
-				if(userid.equals(orderOptional.get().getUser().getId())) {
+				if(userid.equals(orderOptional.get().getUser().getUserid())) {
 					return orderOptional;
 				}else {
 					throw new UserNotFoundException("Order not related to your account");
